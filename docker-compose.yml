@@ -10,12 +10,12 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=false
       - xpack.security.http.ssl.enabled=false
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    deploy:
-      resources:
-        limits:
-          memory: 2g
-          cpus: '1.0'
+      - ES_JAVA_OPTS=-Xms256m -Xmx512m
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 2g
+#          cpus: '1.0'
     healthcheck:   # ✅ healthcheck 추가
       test: ["CMD-SHELL", "curl -f http://localhost:9200 || exit 1"]
       interval: 10s
@@ -53,6 +53,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_HEAP_OPTS: "-Xmx256M -Xms128M"
     networks:
       - msa-network
 
@@ -111,6 +112,8 @@ services:
       - redis
     networks:
       - msa-network
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xmx128m -Xms64m
 
   reservation-service:
     image: lee123432/reservation-service:latest
