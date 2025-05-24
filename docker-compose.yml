@@ -127,7 +127,7 @@ services:
     image: lee123432/flight-service:latest
     ports:
       - "8082:8082"
-    depends_on:        # ✅ 수정: elasticsearch가 건강해질 때까지 기다림(수정 X!!!)
+    depends_on:        # ✅ 수정: elasticsearch가 건강해질 때까지 기다림(수정 X!!!)11
       elasticsearch:
         condition: service_healthy
       gateway:
