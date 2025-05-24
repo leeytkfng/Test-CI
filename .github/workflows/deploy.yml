@@ -17,7 +17,26 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/flight-reservation-main  # ✅ EC2 내 프로젝트 경로11
+            # 설치 안 돼 있으면 docker & docker-compose 설치
+            if ! command -v docker &> /dev/null
+            then
+              sudo apt update
+              sudo apt install -y docker.io
+              sudo usermod -aG docker $USER
+            fi
+
+            if ! command -v docker-compose &> /dev/null
+            then
+              sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+              sudo chmod +x /usr/local/bin/docker-compose
+            fi
+
+            # 프로젝트 clone (최초 1회만)
+            if [ ! -d "flight-reservation-main" ]; then
+              git clone https://github.com/leeytkfng/flight-reservation-main.git
+            fi
+
+            cd flight-reservation-main
             git pull origin main
             docker-compose pull
             docker-compose up -d
