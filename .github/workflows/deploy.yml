@@ -33,7 +33,7 @@ jobs:
 
             # 프로젝트 clone (최초 1회만)
             if [ ! -d "flight-reservation-main" ]; then
-              git clone https://github.com/leeytkfng/flight-reservation-main.git
+              git clone https://github.com/leeytkfng/Test-CI.git
             fi
 
             cd flight-reservation-main
