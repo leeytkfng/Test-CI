@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 빌드할 서비스들 (너 폴더 기준으로)
+# 빌드할 서비스들 (너 폴더 기준으로)1
 SERVICES=("flight-service" "flight-reservation-server" "user-service" "flight-reservation-gateway" "reservation-service")
 
 echo "🔁 전체 서비스 JAR 빌드 시작"
