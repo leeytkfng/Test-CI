@@ -102,7 +102,7 @@ services:
       - msa-network
 
   user-service:
-    build: lee123432/user-service:latest
+    image: lee123432/user-service:latest
     ports:
       - "8081:8081"
     depends_on:
