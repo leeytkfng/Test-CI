@@ -16,7 +16,8 @@ jobs:
           flight-reservation-server,
           user-service,
           flight-reservation-gateway,
-          reservation-service
+          reservation-service,
+          flight-reservation-front-main
         ]
 
     steps:
@@ -30,9 +31,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Set permission for Gradle wrapper
+        if: ${{ !contains(matrix.service, 'front')}}
         run: chmod +x ${{ matrix.service }}/gradlew
 
       - name: Build JAR for ${{ matrix.service }}
+        if: ${{ !contains(matrix.service, 'front')}}
         run: |
           cd ${{ matrix.service }}
           ./gradlew clean bootJar -x test

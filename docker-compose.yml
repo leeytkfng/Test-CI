@@ -71,7 +71,7 @@ services:
       - msa-network
 
   eureka-service:
-    build: ./flight-reservation-server
+    image: lee123432/flight-reservation-server:latest
     ports:
       - "8761:8761"
     depends_on:
@@ -80,7 +80,7 @@ services:
       - msa-network
 
   gateway:
-    build: ./flight-reservation-gateway
+    image: lee123432/flight-reservation-gateway:latest
     ports:
       - "8443:8443"
     networks:
@@ -102,7 +102,7 @@ services:
       - msa-network
 
   user-service:
-    build: ./user-service
+    build: lee123432/user-service:latest
     ports:
       - "8081:8081"
     depends_on:
@@ -113,7 +113,7 @@ services:
       - msa-network
 
   reservation-service:
-    build: ./reservation-service
+    image: lee123432/reservation-service:latest
     ports:
       - "8083:8083"
     depends_on:
@@ -124,10 +124,10 @@ services:
       - msa-network
 
   flight-service:
-    build: ./flight-service
+    image: lee123432/flight-service:latest
     ports:
       - "8082:8082"
-    depends_on:        # ✅ 수정: elasticsearch가 건강해질 때까지 기다림
+    depends_on:        # ✅ 수정: elasticsearch가 건강해질 때까지 기다림(수정 X!!!)
       elasticsearch:
         condition: service_healthy
       gateway:
